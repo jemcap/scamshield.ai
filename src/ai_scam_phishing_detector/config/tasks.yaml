@@ -1,0 +1,88 @@
+analyze_content:
+  description: >
+    Analyze the following message content for potential scam indicators:
+        
+        Content: {content}
+        Sender Info: {sender_info}
+        
+        Your analysis should include:
+        1. Extract all URLs, email addresses, and phone numbers
+        2. Identify suspicious patterns in the content
+        3. Validate any email addresses found
+        4. Provide detailed findings about the content structure and language
+        
+        Focus on identifying:
+        - Urgency language and pressure tactics
+        - Financial or prize-related claims
+        - Authority impersonation attempts
+        - Requests for personal information
+        - Grammar and formatting anomalies
+  expected_output: >
+    A comprehensive analysis report containing:
+        - Extracted URLs, emails, and phone numbers
+        - List of suspicious patterns detected
+        - Content structure analysis
+        - Language pattern assessment
+        - Initial risk indicators
+  agent: content_analyzer
+
+pattern_detection:
+  description: >
+    Perform deep pattern analysis on the following communication:
+        
+        Content: {content}
+        Sender Info: {sender_info}
+        
+        Your analysis should focus on:
+        1. Identifying known scam patterns and techniques
+        2. Analyzing sender reputation indicators
+        3. Detecting social engineering tactics
+        4. Identifying manipulation techniques
+        5. Comparing against known fraud patterns
+        
+        Look for:
+        - Phishing patterns
+        - Social engineering tactics
+        - Impersonation attempts
+        - Emotional manipulation
+        - Technical spoofing indicators
+  expected_output: >
+    A detailed pattern analysis report including:
+        - Identified scam patterns with confidence levels
+        - Sender reputation analysis
+        - Social engineering tactics detected
+        - Manipulation techniques identified
+        - Pattern matching results
+  context:
+    - analyze_content
+  agent: pattern_detector
+
+threat_detection:
+  description: >
+    Assess the potential threat level of the following communication:
+        
+        Content: {content}
+        Sender Info: {sender_info}
+        
+        Your assessment should include:
+        1. Evaluating the context and intent of the message
+        2. Analyzing the potential impact on users
+        3. Identifying high-risk indicators
+        4. Assessing the likelihood of success for the scam
+        5. Prioritizing threats based on severity
+        
+        Focus on:
+        - Contextual threat analysis
+        - User impact assessment
+        - Risk prioritization
+  expected_output: >
+    A threat assessment report containing:
+        - Threat level rating (low, medium, high)
+        - Overall risk score (0-100)
+        - Contextual analysis findings
+        - Potential user impact summary
+        - Risk prioritization recommendations
+  context:
+    - pattern_detection
+  agent: threat_assessor
+  output_file: output/threat_assessment.md

@@ -1,0 +1,8 @@
+crewai
+crewai_tools
+python-dotenv
+requests
+email-validator
+phonenumbers
+openai
+gradio
