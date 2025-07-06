@@ -2,6 +2,7 @@ from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from typing import List
+from .tools import ReputationSearchTool, LinkAnalysisTool
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
@@ -17,6 +18,7 @@ class AiScamPhishingDetector():
     def content_analyzer(self) -> Agent:
         return Agent(
             config=self.agents_config['content_analyzer'], # type: ignore[index]
+            tools=[LinkAnalysisTool()],
             verbose=True
         )
 
@@ -24,12 +26,14 @@ class AiScamPhishingDetector():
     def pattern_detector(self) -> Agent:
         return Agent(
             config=self.agents_config['pattern_detector'], # type: ignore[index]
+            tools=[ReputationSearchTool()],
             verbose=True
         )
     @agent
     def threat_assessor(self) -> Agent:
         return Agent(
             config=self.agents_config['threat_assessor'], # type: ignore[index]
+            tools=[ReputationSearchTool(), LinkAnalysisTool()],
             verbose=True
         )
 

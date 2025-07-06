@@ -6,10 +6,17 @@ analyze_content:
         Sender Info: {sender_info}
         
         Your analysis should include:
-        1. Extract all URLs, email addresses, and phone numbers
+        1. Use the LinkAnalysisTool to extract and analyze ALL URLs/links found in the content
         2. Identify suspicious patterns in the content
-        3. Validate any email addresses found
+        3. Validate extracted information and flag suspicious items
         4. Provide detailed findings about the content structure and language
+        
+        IMPORTANT: Use the LinkAnalysisTool to systematically analyze all links:
+        - Extract all URLs from the message content
+        - Check each URL for malicious patterns
+        - Verify domain safety and reputation
+        - Identify URL shorteners and their final destinations
+        - Report any malicious or suspicious links found
         
         Focus on identifying:
         - Urgency language and pressure tactics
@@ -17,13 +24,18 @@ analyze_content:
         - Authority impersonation attempts
         - Requests for personal information
         - Grammar and formatting anomalies
+        - Suspicious contact information patterns
+        - Impersonation of known and trusted entities
+        - Malicious or suspicious URLs/links
   expected_output: >
     A comprehensive analysis report containing:
-        - Extracted URLs, emails, and phone numbers
-        - List of suspicious patterns detected
+        - Complete link analysis results for all URLs found
+        - List of suspicious patterns detected in extracted information
         - Content structure analysis
         - Language pattern assessment
+        - Risk assessment of any links/URLs found  
         - Initial risk indicators
+        - Flagged suspicious contact information
   agent: content_analyzer
 
 pattern_detection:
@@ -35,10 +47,17 @@ pattern_detection:
         
         Your analysis should focus on:
         1. Identifying known scam patterns and techniques
-        2. Analyzing sender reputation indicators
-        3. Detecting social engineering tactics
-        4. Identifying manipulation techniques
-        5. Comparing against known fraud patterns
+        2. Using the ReputationSearchTool to check sender reputation for any emails, phone numbers, domains, or URLs found
+        3. Analyzing sender reputation indicators based on web search results
+        4. Detecting social engineering tactics
+        5. Identifying manipulation techniques
+        6. Comparing against known fraud patterns
+        
+        IMPORTANT: Use the ReputationSearchTool to search for reputation information about:
+        - Any email addresses mentioned
+        - Any phone numbers found
+        - Any domains or URLs referenced
+        - The sender's identity if identifiable
         
         Look for:
         - Phishing patterns
@@ -46,13 +65,16 @@ pattern_detection:
         - Impersonation attempts
         - Emotional manipulation
         - Technical spoofing indicators
+        - Previous scam reports or complaints
   expected_output: >
     A detailed pattern analysis report including:
         - Identified scam patterns with confidence levels
-        - Sender reputation analysis
+        - Comprehensive reputation search results for all identifiers
+        - Sender reputation analysis with evidence from web searches
         - Social engineering tactics detected
         - Manipulation techniques identified
         - Pattern matching results
+        - Reputation flags and scam reports found
   context:
     - analyze_content
   agent: pattern_detector
@@ -66,22 +88,35 @@ threat_detection:
         
         Your assessment should include:
         1. Evaluating the context and intent of the message
-        2. Analyzing the potential impact on users
-        3. Identifying high-risk indicators
-        4. Assessing the likelihood of success for the scam
-        5. Prioritizing threats based on severity
+        2. Using ReputationSearchTool to verify any reputation findings from previous analysis
+        3. Using LinkAnalysisTool to double-check any suspicious URLs if needed
+        4. Analyzing the potential impact on users
+        5. Identifying high-risk indicators based on reputation searches and link analysis
+        6. Assessing the likelihood of success for the scam
+        7. Prioritizing threats based on severity, reputation evidence, and malicious links
+        
+        CRITICAL RULES:
+        - If any identifier (email, phone, domain, URL) has been flagged as a scammer 
+          in the reputation search results, automatically classify as HIGH RISK
+        - If any URLs are identified as malicious/phishing by LinkAnalysisTool, 
+          automatically classify as HIGH RISK or CRITICAL
+        - Combine findings from both reputation and link analysis for final assessment
         
         Focus on:
         - Contextual threat analysis
         - User impact assessment
-        - Risk prioritization
+        - Risk prioritization based on reputation evidence and malicious links
+        - Automated threat classification for known scammers and malicious URLs
   expected_output: >
-    A threat assessment report containing:
-        - Threat level rating (low, medium, high)
-        - Overall risk score (0-100)
+    A comprehensive threat assessment report containing:
+        - Threat level rating (low, medium, high, critical) with evidence
+        - Overall risk score (0-100) incorporating reputation and link findings
         - Contextual analysis findings
         - Potential user impact summary
         - Risk prioritization recommendations
+        - Automated scammer and malicious link identification results
+        - Specific recommendations for handling identified threats
+        - Recommended actions based on reputation analysis
   context:
     - pattern_detection
   agent: threat_assessor
