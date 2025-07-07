@@ -121,3 +121,33 @@ threat_detection:
     - pattern_detection
   agent: threat_assessor
   output_file: output/threat_assessment.md
+
+educate_users:
+  description: >
+    Provide educational content to help users recognize and avoid scams based on the following communication:
+    Content: {content}
+    Sender Info: {sender_info} 
+
+    Your educational content should include:
+    1. Key indicators of scams and phishing attempts
+    2. Common tactics used by scammers
+    3. Practical tips for users to protect themselves
+    4. Examples of red flags to watch for
+    5. Resources for further learning about scams and phishing
+    6. Actionable advice based on the specific content analyzed
+    7. Recommendations for reporting scams or phishing attempts
+    8. Emphasis on the importance of skepticism and verification
+  expected_output: >
+    A user-friendly educational guide containing:
+        - List of key scam indicators with explanations
+        - Common scam tactics and how to recognize them
+        - Practical tips for avoiding scams
+        - Examples of red flags with explanations
+        - Resources for further learning
+        - Actionable advice tailored to the specific content
+        - Recommendations for reporting scams
+        - Emphasis on skepticism and verification
+  context:
+    - threat_detection
+  agent: educator
+  output_file: output/educational_guide.md

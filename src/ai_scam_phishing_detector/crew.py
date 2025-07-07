@@ -3,12 +3,14 @@ from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from typing import List
 from .tools import ReputationSearchTool, LinkAnalysisTool
+
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
 
+
 @CrewBase
-class AiScamPhishingDetector():
+class AiScamPhishingDetector:
     """AiScamPhishingDetector crew"""
 
     agents: List[BaseAgent]
@@ -17,24 +19,31 @@ class AiScamPhishingDetector():
     @agent
     def content_analyzer(self) -> Agent:
         return Agent(
-            config=self.agents_config['content_analyzer'], # type: ignore[index]
+            config=self.agents_config["content_analyzer"],  # type: ignore[index]
             tools=[LinkAnalysisTool()],
-            verbose=True
+            verbose=True,
         )
 
     @agent
     def pattern_detector(self) -> Agent:
         return Agent(
-            config=self.agents_config['pattern_detector'], # type: ignore[index]
+            config=self.agents_config["pattern_detector"],  # type: ignore[index]
             tools=[ReputationSearchTool()],
-            verbose=True
+            verbose=True,
         )
+
     @agent
     def threat_assessor(self) -> Agent:
         return Agent(
-            config=self.agents_config['threat_assessor'], # type: ignore[index]
+            config=self.agents_config["threat_assessor"],  # type: ignore[index]
             tools=[ReputationSearchTool(), LinkAnalysisTool()],
-            verbose=True
+            verbose=True,
+        )
+
+    @agent
+    def educator(self) -> Agent:
+        return Agent(
+            config=self.agents_config["educator"], verbose=True  # type: ignore[index]
         )
 
     # To learn more about structured task outputs,
@@ -43,18 +52,25 @@ class AiScamPhishingDetector():
     @task
     def analyze_content(self) -> Task:
         return Task(
-            config=self.tasks_config['analyze_content'], # type: ignore[index]
+            config=self.tasks_config["analyze_content"],  # type: ignore[index]
         )
 
     @task
     def pattern_detection(self) -> Task:
         return Task(
-            config=self.tasks_config['pattern_detection'], # type: ignore[index]
+            config=self.tasks_config["pattern_detection"],  # type: ignore[index]
         )
+
     @task
     def threat_detection(self) -> Task:
         return Task(
-            config=self.tasks_config['threat_detection'], # type: ignore[index]
+            config=self.tasks_config["threat_detection"],  # type: ignore[index]
+        )
+
+    @task
+    def educate_users(self) -> Task:
+        return Task(
+            config=self.tasks_config["educate_users"],  # type: ignore[index]
         )
 
     @crew
@@ -64,8 +80,8 @@ class AiScamPhishingDetector():
         # https://docs.crewai.com/concepts/knowledge#what-is-knowledge
 
         return Crew(
-            agents=self.agents, # Automatically created by the @agent decorator
-            tasks=self.tasks, # Automatically created by the @task decorator
+            agents=self.agents,  # Automatically created by the @agent decorator
+            tasks=self.tasks,  # Automatically created by the @task decorator
             process=Process.sequential,
             verbose=True,
             # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
