@@ -101,12 +101,12 @@ def create_interface():
         
         # Header
         gr.Markdown("""
-        # AI Scam & Phishing Detector
+        # scamshield.ai | AI Scam & Phishing Detector
         
-        **Analyze suspicious messages, emails, and communications for potential scams and phishing attempts.**
+        **Analyse suspicious messages, emails, and communications for potential scams and phishing attempts.**
         
         This AI-powered system uses multiple specialized agents to:
-        - Extract and analyze URLs for malicious content
+        - Extract and analyse URLs for malicious content
         - Check sender reputation across the web
         - Detect scam patterns and social engineering tactics
         - Provide comprehensive threat assessments
