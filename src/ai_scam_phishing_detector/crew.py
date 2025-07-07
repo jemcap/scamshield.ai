@@ -2,7 +2,7 @@ from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from typing import List
-from .tools import ReputationSearchTool, LinkAnalysisTool
+from .tools import ReputationSearchTool, LinkAnalysisTool, TextAnalysisTool, PhoneAnalysisTool
 
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
@@ -36,15 +36,15 @@ class AiScamPhishingDetector:
     def threat_assessor(self) -> Agent:
         return Agent(
             config=self.agents_config["threat_assessor"],  # type: ignore[index]
-            tools=[ReputationSearchTool(), LinkAnalysisTool()],
+            tools=[ReputationSearchTool(), LinkAnalysisTool(), TextAnalysisTool(), PhoneAnalysisTool()],
             verbose=True,
         )
 
-    @agent
-    def educator(self) -> Agent:
-        return Agent(
-            config=self.agents_config["educator"], verbose=True  # type: ignore[index]
-        )
+    # @agent
+    # def educator(self) -> Agent:
+    #     return Agent(
+    #         config=self.agents_config["educator"], verbose=True  # type: ignore[index]
+    #     )
 
     # To learn more about structured task outputs,
     # task dependencies, and task callbacks, check out the documentation:
@@ -67,11 +67,11 @@ class AiScamPhishingDetector:
             config=self.tasks_config["threat_detection"],  # type: ignore[index]
         )
 
-    @task
-    def educate_users(self) -> Task:
-        return Task(
-            config=self.tasks_config["educate_users"],  # type: ignore[index]
-        )
+    # @task
+    # def educate_users(self) -> Task:
+    #     return Task(
+    #         config=self.tasks_config["educate_users"],  # type: ignore[index]
+    #     )
 
     @crew
     def crew(self) -> Crew:

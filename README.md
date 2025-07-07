@@ -58,7 +58,25 @@ SERPER_API_KEY=your_serper_api_key_here
 
 ## 🚀 Usage
 
-### Running the Main System
+### 🌐 Web Interface (Recommended)
+```bash
+# Launch the Gradio web interface
+python gradio_interface.py
+
+# Or use the launcher script
+python launch_interface.py
+```
+Then open your browser to `http://localhost:7860`
+
+### 📊 Web Interface Features:
+- **User-friendly input forms** for message content and sender information
+- **Real-time analysis** with progress indicators  
+- **Split-view results** showing threat assessment and educational guide
+- **Copy-to-clipboard** functionality for sharing results
+- **Example messages** for testing the system
+- **Privacy information** and usage guidelines
+
+### 🖥️ Command Line Interface
 ```bash
 crewai run
 ```
@@ -66,6 +84,9 @@ crewai run
 ### Testing the Reputation Tool
 ```bash
 python test_reputation_tool.py
+
+# Test link analysis tool
+python test_link_analysis_tool.py
 ```
 
 ## 📊 How It Works

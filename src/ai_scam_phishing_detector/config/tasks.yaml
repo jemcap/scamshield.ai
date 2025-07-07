@@ -1,153 +1,220 @@
 analyze_content:
   description: >
-    Analyze the following message content for potential scam indicators:
+    Analyze the following message content for potential scam indicators using comprehensive multi-vector analysis:
         
         Content: {content}
         Sender Info: {sender_info}
         
-        Your analysis should include:
-        1. Use the LinkAnalysisTool to extract and analyze ALL URLs/links found in the content
-        2. Identify suspicious patterns in the content
-        3. Validate extracted information and flag suspicious items
-        4. Provide detailed findings about the content structure and language
+        **COMPREHENSIVE ANALYSIS REQUIREMENTS:**
         
-        IMPORTANT: Use the LinkAnalysisTool to systematically analyze all links:
-        - Extract all URLs from the message content
-        - Check each URL for malicious patterns
-        - Verify domain safety and reputation
-        - Identify URL shorteners and their final destinations
-        - Report any malicious or suspicious links found
+        **PRIMARY ANALYSIS (Always Required):**
+        1. **URL/Link Analysis**: Use LinkAnalysisTool to analyze ALL URLs found (highest priority if URLs present)
+        2. **Phone Number Analysis**: Use PhoneAnalysisTool to verify all phone numbers found
+        3. **Content Pattern Analysis**: Identify social engineering tactics and manipulation techniques
+        4. **Contact Information Extraction**: Extract and validate all contact methods
         
-        Focus on identifying:
-        - Urgency language and pressure tactics
-        - Financial or prize-related claims
-        - Authority impersonation attempts
-        - Requests for personal information
-        - Grammar and formatting anomalies
-        - Suspicious contact information patterns
-        - Impersonation of known and trusted entities
-        - Malicious or suspicious URLs/links
+        **URL ANALYSIS (When URLs Present):**
+        - Perform comprehensive LinkAnalysisTool analysis for every URL
+        - Assess domain safety, reputation, and security indicators
+        - Check for phishing patterns, malicious redirects, and credential harvesting
+        - Analyze URL structure for spoofing and typosquatting
+        - Provide clear safety assessment and evidence for each URL
+        
+        **PHONE ANALYSIS (When Phone Numbers Present):**
+        - Use PhoneAnalysisTool to verify business registration and legitimacy
+        - Check against scam databases and complaint sites
+        - Analyze area codes and location consistency
+        - Verify business claims against phone registration data
+        
+        **CONTENT ANALYSIS (Always Required):**
+        - Identify urgency language and pressure tactics
+        - Detect authority impersonation and fake business claims
+        - Analyze grammar, formatting, and language patterns
+        - Check for personalization level and generic messaging
+        - Identify financial requests and information gathering attempts
+        
+        **CROSS-VECTOR VERIFICATION:**
+        - Verify consistency between claimed identity and contact methods
+        - Check alignment between business claims and phone/URL legitimacy
+        - Identify discrepancies that suggest fraud or impersonation
+        
   expected_output: >
-    A comprehensive analysis report containing:
-        - Complete link analysis results for all URLs found
-        - List of suspicious patterns detected in extracted information
-        - Content structure analysis
-        - Language pattern assessment
-        - Risk assessment of any links/URLs found  
-        - Initial risk indicators
-        - Flagged suspicious contact information
+    A comprehensive analysis report with balanced multi-vector assessment:
+        
+        **EXECUTIVE SUMMARY:**
+        - Overall risk assessment with primary threat vectors identified
+        - Key findings across all analysis vectors
+        
+        **URL SECURITY ANALYSIS (If URLs Found):**
+        - Complete LinkAnalysisTool results for every URL
+        - Safety rating for each URL (SAFE/SUSPICIOUS/MALICIOUS) with evidence
+        - Specific threat indicators and technical details
+        - User recommendations for each URL
+        
+        **PHONE NUMBER VERIFICATION (If Numbers Found):**
+        - PhoneAnalysisTool results with business registration status
+        - Scam database check results and reputation analysis
+        - Location and legitimacy assessment
+        
+        **CONTENT PATTERN ANALYSIS:**
+        - Social engineering tactics identified
+        - Language patterns and manipulation techniques
+        - Personalization assessment and generic messaging indicators
+        
+        **CONTACT INFORMATION ASSESSMENT:**
+        - All extracted contact methods with validation status
+        - Cross-verification results and consistency analysis
+        - Red flags and legitimacy concerns identified
+        
+        **INTEGRATED RISK FACTORS:**
+        - Primary risk drivers and their impact scores
+        - Supporting evidence from all analysis vectors
+        - Overall threat landscape assessment
   agent: content_analyzer
 
 pattern_detection:
   description: >
-    Perform deep pattern analysis on the following communication:
+    Perform comprehensive pattern analysis across all communication vectors with balanced threat detection:
         
         Content: {content}
         Sender Info: {sender_info}
         
-        Your analysis should focus on:
-        1. Identifying known scam patterns and techniques
-        2. Using the ReputationSearchTool to check sender reputation for any emails, phone numbers, domains, or URLs found
-        3. Analyzing sender reputation indicators based on web search results
-        4. Detecting social engineering tactics
-        5. Identifying manipulation techniques
-        6. Comparing against known fraud patterns
+        **MULTI-VECTOR PATTERN ANALYSIS:**
         
-        IMPORTANT: Use the ReputationSearchTool to search for reputation information about:
-        - Any email addresses mentioned
-        - Any phone numbers found
-        - Any domains or URLs referenced
-        - The sender's identity if identifiable
+        **URL Pattern Detection (High Priority When Present):**
+        - Analyze URL patterns for known malicious indicators
+        - Check domain reputation and phishing site patterns
+        - Identify URL-based social engineering tactics
+        - Cross-reference with threat intelligence databases
         
-        Look for:
-        - Phishing patterns
-        - Social engineering tactics
-        - Impersonation attempts
-        - Emotional manipulation
-        - Technical spoofing indicators
-        - Previous scam reports or complaints
+        **Communication Pattern Analysis:**
+        - Use ReputationSearchTool to check sender reputation across all identifiers
+        - Identify known scam patterns and social engineering techniques
+        - Analyze message structure and psychological manipulation tactics
+        - Detect urgency patterns and emotional pressure techniques
+        
+        **Contact Verification Patterns:**
+        - Use PhoneAnalysisTool to verify business registration patterns
+        - Check phone numbers against scam complaint databases
+        - Analyze contact method consistency and legitimacy patterns
+        - Identify cross-border scam operation indicators
+        
+        **INTEGRATED PATTERN RECOGNITION:**
+        - Correlate patterns across multiple threat vectors
+        - Identify sophisticated multi-vector attack patterns
+        - Assess pattern confidence levels and threat indicators
+        - Cross-reference findings with known threat intelligence
+        
   expected_output: >
-    A detailed pattern analysis report including:
-        - Identified scam patterns with confidence levels
-        - Comprehensive reputation search results for all identifiers
-        - Sender reputation analysis with evidence from web searches
-        - Social engineering tactics detected
-        - Manipulation techniques identified
-        - Pattern matching results
-        - Reputation flags and scam reports found
+    A comprehensive pattern analysis report with balanced threat detection:
+        
+        **PATTERN SUMMARY:**
+        - Identified threat patterns with confidence levels
+        - Primary attack vectors and supporting indicators
+        
+        **URL-BASED PATTERNS (If URLs Present):**
+        - Malicious URL patterns and domain reputation analysis
+        - Phishing site indicators and credential harvesting patterns
+        - URL-based social engineering and manipulation tactics
+        
+        **COMMUNICATION PATTERNS:**
+        - Social engineering techniques and psychological manipulation
+        - Known scam methodologies and fraud indicators
+        - Language patterns and authenticity assessment
+        
+        **CONTACT VERIFICATION PATTERNS:**
+        - Phone number legitimacy and business registration patterns
+        - Sender reputation analysis across multiple platforms
+        - Contact method consistency and cross-verification results
+        
+        **CROSS-VECTOR CORRELATION:**
+        - Multi-vector threat correlation analysis
+        - Sophisticated attack pattern identification
+        - Integrated threat intelligence assessment
   context:
     - analyze_content
   agent: pattern_detector
 
 threat_detection:
   description: >
-    Assess the potential threat level of the following communication:
+    Perform comprehensive threat assessment with balanced multi-vector analysis and appropriate risk weighting:
+    
+    **INTEGRATED THREAT ASSESSMENT FRAMEWORK:**
+    
+    **CRITICAL RISK INDICATORS (Automatic Escalation):**
+    - Malicious URLs confirmed (phishing sites, credential harvesting, malware)
+    - Phone numbers with multiple scam reports and confirmed fraud patterns
+    - Authority impersonation with spoofed contact information
+    - Financial fraud attempts with unverified contact methods
+    - Confirmed identity theft or data harvesting attempts
+    
+    **HIGH RISK INDICATORS (Strong Threat Signals):**
+    - Suspicious URLs with multiple red flags or reputation issues
+    - Unregistered phone numbers making business claims
+    - Unsolicited offers (job, investment, prize) with unverified contacts
+    - Social engineering with pressure tactics and unverified identity
+    - Contact information inconsistencies suggesting impersonation
+    
+    **BALANCED RISK ASSESSMENT CRITERIA:**
+    - **URL Security (40% weight when URLs present)**: Malicious links pose immediate threat
+    - **Contact Legitimacy (30% weight)**: Phone and email verification results
+    - **Content Analysis (20% weight)**: Social engineering and manipulation tactics
+    - **Reputation Intelligence (10% weight)**: Historical threat data and patterns
+    
+    **COMPREHENSIVE THREAT EVALUATION:**
+    - Integrate all analysis results (URL, phone, content, reputation)
+    - Weight threat indicators based on severity and likelihood
+    - Consider cumulative risk from multiple moderate indicators
+    - Assess sophisticated multi-vector attack patterns
+    - Evaluate potential victim impact and threat urgency
         
-        Content: {content}
-        Sender Info: {sender_info}
-        
-        Your assessment should include:
-        1. Evaluating the context and intent of the message
-        2. Using ReputationSearchTool to verify any reputation findings from previous analysis
-        3. Using LinkAnalysisTool to double-check any suspicious URLs if needed
-        4. Analyzing the potential impact on users
-        5. Identifying high-risk indicators based on reputation searches and link analysis
-        6. Assessing the likelihood of success for the scam
-        7. Prioritizing threats based on severity, reputation evidence, and malicious links
-        
-        CRITICAL RULES:
-        - If any identifier (email, phone, domain, URL) has been flagged as a scammer 
-          in the reputation search results, automatically classify as HIGH RISK
-        - If any URLs are identified as malicious/phishing by LinkAnalysisTool, 
-          automatically classify as HIGH RISK or CRITICAL
-        - Combine findings from both reputation and link analysis for final assessment
-        
-        Focus on:
-        - Contextual threat analysis
-        - User impact assessment
-        - Risk prioritization based on reputation evidence and malicious links
-        - Automated threat classification for known scammers and malicious URLs
   expected_output: >
-    A comprehensive threat assessment report containing:
-        - Threat level rating (low, medium, high, critical) with evidence
-        - Overall risk score (0-100) incorporating reputation and link findings
-        - Contextual analysis findings
-        - Potential user impact summary
-        - Risk prioritization recommendations
-        - Automated scammer and malicious link identification results
-        - Specific recommendations for handling identified threats
-        - Recommended actions based on reputation analysis
+    A comprehensive threat assessment with balanced multi-vector analysis:
+    
+    **THREAT LEVEL: [CRITICAL/HIGH/MEDIUM/LOW/MINIMAL]**
+    **OVERALL RISK SCORE: [0-100] with detailed breakdown**
+    
+    **PRIMARY THREAT ANALYSIS:**
+    - Highest priority threat vector identified
+    - Critical risk factors and immediate concerns
+    - Evidence supporting primary threat assessment
+    
+    **URL SECURITY ASSESSMENT (If URLs Present):**
+    - Safety analysis for every URL with explicit ratings
+    - Technical evidence and malicious indicators found
+    - Specific recommendations for URL handling
+    - Impact of URL threats on overall risk level
+    
+    **CONTACT VERIFICATION RESULTS:**
+    - Phone number legitimacy and business registration status
+    - Email and sender authentication analysis
+    - Cross-verification results and consistency assessment
+    - Impact of contact verification on risk level
+    
+    **CONTENT THREAT ANALYSIS:**
+    - Social engineering tactics and manipulation techniques
+    - Urgency indicators and pressure tactics identified
+    - Language patterns and authenticity assessment
+    - Psychological manipulation risk factors
+    
+    **INTEGRATED RISK ASSESSMENT:**
+    - Multi-vector threat correlation analysis
+    - Cumulative risk evaluation across all indicators
+    - Sophisticated attack pattern identification
+    - Balanced risk scoring with evidence weighting
+    
+    **ACTIONABLE RECOMMENDATIONS:**
+    - Immediate actions required based on threat level
+    - Specific handling instructions for URLs and contact methods
+    - General security precautions and awareness guidance
+    - Reporting recommendations for confirmed threats
+    
+    **DETAILED EVIDENCE SUMMARY:**
+    - Technical findings from all analysis tools
+    - Reputation and intelligence data supporting assessment
+    - Cross-verification results and discrepancy analysis
+    - Final threat determination reasoning with balanced consideration
   context:
+    - analyze_content
     - pattern_detection
   agent: threat_assessor
-  output_file: output/threat_assessment.md
-
-educate_users:
-  description: >
-    Provide educational content to help users recognize and avoid scams based on the following communication:
-    Content: {content}
-    Sender Info: {sender_info} 
-
-    Your educational content should include:
-    1. Key indicators of scams and phishing attempts
-    2. Common tactics used by scammers
-    3. Practical tips for users to protect themselves
-    4. Examples of red flags to watch for
-    5. Resources for further learning about scams and phishing
-    6. Actionable advice based on the specific content analyzed
-    7. Recommendations for reporting scams or phishing attempts
-    8. Emphasis on the importance of skepticism and verification
-  expected_output: >
-    A user-friendly educational guide containing:
-        - List of key scam indicators with explanations
-        - Common scam tactics and how to recognize them
-        - Practical tips for avoiding scams
-        - Examples of red flags with explanations
-        - Resources for further learning
-        - Actionable advice tailored to the specific content
-        - Recommendations for reporting scams
-        - Emphasis on skepticism and verification
-  context:
-    - threat_detection
-  agent: educator
-  output_file: output/educational_guide.md
